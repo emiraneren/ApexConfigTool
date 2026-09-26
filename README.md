@@ -1,8 +1,6 @@
 # Apex Config Tool
 
-Apex Legends için çalışan bir yapılandırma aracı. Ekran, grafik, gölge, performans önayarları,
-FOV/FPS/mouse gibi autoexec ayarlarını arayüzden düzenler; her değişiklikten önce otomatik
-yedek alır ve uygulamadan önce bir önizleme ekranı gösterir.
+Apex Legends için çalışan bir yapılandırma aracı. Ekran, grafik, gölge ve performans önayarlarını; FOV, FPS limiti, hassasiyet, düşük gecikme gibi autoexec ayarlarını arayüzden düzenler. Her değişiklikten önce otomatik yedek alır ve uygulamadan önce bir önizleme ekranı gösterir.
 
 Arayüz **Türkçe, İngilizce, Çince ve Rusça**dır; sol alt köşedeki **TR / EN / 中文 / RU** düğmeleriyle anında değiştirilebilir.
 
@@ -10,58 +8,50 @@ Arayüz **Türkçe, İngilizce, Çince ve Rusça**dır; sol alt köşedeki **TR 
 
 ## Kullanım (en hızlı yol)
 
-Kaynak koduyla uğraşmadan doğrudan çalıştırmak isterseniz, `Program\ApexConfigTool.exe`
-dosyasına çift tıklamanız yeterli — .NET 9 masaüstü çalışma zamanı (runtime) kurulu olmalı
-(SDK değil, sadece runtime yeter): https://dotnet.microsoft.com/download/dotnet/9.0
+1. Bu sayfadaki **`ApexConfigTool.exe`** dosyasını indirin.
+2. Çift tıklayıp çalıştırın. Kurulum gerekmez, yanında başka dosya istemez.
 
-`Program` klasörü kaynak kontrolüne dahil değildir (`.gitignore`); her derlemede
-aşağıdaki komutla yeniden üretilir.
+> Bilgisayarınızda **.NET 10 Desktop Runtime** kurulu olmalı (SDK değil, sadece runtime yeter):
+> https://dotnet.microsoft.com/download/dotnet/10.0
+>
+> Yoksa uygulama "runtime bulunamadı" hatası verir; yukarıdaki linkten "Desktop Runtime" (x64) indirip kurmanız yeterli.
 
-## Gereksinimler (kaynaktan çalıştırmak için)
-
-- Windows
-- .NET 9 SDK (bu makinede kurulu: `winget install Microsoft.DotNet.SDK.9`)
-
-## Çalıştırma
-
-```
-dotnet run
-```
-
-veya tek klasörde toplanmış çalıştırılabilir bir sürüm üretmek için:
-
-```
-dotnet publish -c Release -r win-x64 --self-contained false -o Program
-```
-
-Bu komut `Program\ApexConfigTool.exe` dosyasını (ve yanındaki birkaç `.dll` dosyasını) üretir.
+Apex'i Steam veya EA App'ten kurduysanız oyun klasörünü ve config dosyalarını kendisi bulur. Apex açıkken dosyalara yazma işlemi engellenir; önce oyunu kapatmanız istenir.
 
 ## Neler yapıyor?
 
-- **Otomatik tespit**: Steam kütüphanelerini (`libraryfolders.vdf`) ve EA App / Origin kurulumlarını
-  (kayıt defteri + yaygın klasörler) tarayarak Apex'i bulur. Kullanıcı config'i her zaman
-  `%UserProfile%\Saved Games\Respawn\Apex\local\videoconfig.txt` içinde aranır.
-- **Ekran / Grafik / Gölgeler**: `videoconfig.txt` içindeki `setting.*` anahtarlarını düzenler.
-  Bir ayar dosyada zaten yoksa dokunulmaz (sürümler arası farkları güvenle atlar).
-- **Performans önayarları**: Rekabetçi / Maksimum FPS / Dengeli / Kalite; grafik ve gölge
-  sayfalarını tek tıkla ayarlar.
-- **Autoexec**: FOV, FPS limiti (oyun içi + lobi), ham fare girişi, mouse hızlanması, film
-  grenliliği gibi ayarları `cfg\autoexec.cfg` içine, yalnızca kendi işaretli bloğu
-  (`// ===== ApexConfigTool BASLANGIC/BITIS =====`) üzerinden yazar; elle eklenen diğer satırlara
-  dokunmaz.
-- **Profiller**: Tüm yapılandırmayı adlandırılmış bir JSON dosyası olarak kaydedip geri yükler
-  (`%LocalAppData%\ApexConfigTool\Profiles`).
-- **Yedekler**: Her yazmadan önce otomatik yedek alınır; Yedekler sayfasından geri yüklenebilir
-  veya silinebilir.
-- **Gelişmiş**: `videoconfig.txt` içindeki tüm anahtarları arama/filtreleme ile inceleme ve ham
-  metin düzenleyici.
+- **Ekran / Grafik / Gölgeler**: `videoconfig.txt` içindeki ayarları düzenler. Dosyada olmayan bir ayara dokunmaz.
+- **Performans önayarları**: Rekabetçi / Maksimum FPS / Dengeli / Kalite; tek tıkla grafik ve gölge ayarlarını yükler.
+- **Autoexec**: FOV, FPS limiti, ham fare girişi, hassasiyet (genel ve nişangaha özel), düşük gecikme, görsel sadelik gibi ayarları `cfg\autoexec.cfg` içine, yalnızca kendi işaretli bloğu üzerinden yazar; elle eklediğiniz diğer satırlara dokunmaz.
+- **Profiller**: Tüm yapılandırmayı adlandırılmış bir profil olarak kaydedip geri yükler.
+- **Yedekler**: Her yazmadan önce otomatik yedek alınır; Yedekler sayfasından geri yüklenebilir veya silinebilir.
+- **Gelişmiş**: `videoconfig.txt` içindeki tüm anahtarları arama ile inceleme ve ham metin düzenleyici.
 
-Apex çalışırken dosyalara yazma işlemi engellenir; önce oyunun kapatılması istenir.
+Yalnızca oyunun kendi client ayarlarını düzenler; oyuna müdahale eden, makro veya hile işlevi yoktur.
 
-## Proje yapısı
+## Kaynak koddan derleme
+
+Kaynak kod `src` klasöründedir. .NET 10 SDK gerekir.
 
 ```
-Models/     Veri sınıfları (kurulum bilgisi, yedek girişi, profil, vb.)
-Services/   İş mantığı (tespit, dosya okuma/yazma, diff, lokalizasyon)
-Views/      Her sayfa için UserControl (XAML + code-behind)
+cd src
+dotnet run
+```
+
+Tek dosyalık `.exe` üretmek için:
+
+```
+cd src
+dotnet publish -c Release -r win-x64 --self-contained false -p:PublishSingleFile=true -o ..\out
+```
+
+## Klasör yapısı
+
+```
+ApexConfigTool.exe   Çalıştırılabilir uygulama
+README.md            Bu dosya
+src/                 Kaynak kod
+  Models/            Veri sınıfları
+  Services/          İş mantığı (tespit, dosya okuma/yazma, diff, çeviri)
+  Views/             Her sayfa için UserControl (XAML + code-behind)
 ```
