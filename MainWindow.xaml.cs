@@ -528,30 +528,30 @@ public partial class MainWindow : Window
         }
     }
 
-    private void LangTrButton_Click(object sender, RoutedEventArgs e)
-    {
-        LocalizationService.Instance.Language = AppLanguage.Turkish;
-        UpdateLanguageButtons();
-        UpdateProcessStatus();
-    }
+    private void LangTrButton_Click(object sender, RoutedEventArgs e) => SetLanguage(AppLanguage.Turkish);
 
-    private void LangEnButton_Click(object sender, RoutedEventArgs e)
+    private void LangEnButton_Click(object sender, RoutedEventArgs e) => SetLanguage(AppLanguage.English);
+
+    private void LangZhButton_Click(object sender, RoutedEventArgs e) => SetLanguage(AppLanguage.Chinese);
+
+    private void LangRuButton_Click(object sender, RoutedEventArgs e) => SetLanguage(AppLanguage.Russian);
+
+    private void SetLanguage(AppLanguage newLanguage)
     {
-        LocalizationService.Instance.Language = AppLanguage.English;
+        LocalizationService.Instance.Language = newLanguage;
         UpdateLanguageButtons();
         UpdateProcessStatus();
     }
 
     private void UpdateLanguageButtons()
     {
-        bool isTurkish = LocalizationService.Instance.IsTurkish;
+        var active = (Style)FindResource("LanguageToggleActiveButtonStyle");
+        var inactive = (Style)FindResource("LanguageToggleButtonStyle");
+        var current = LocalizationService.Instance.Language;
 
-        LangTrButton.Style = isTurkish
-            ? (Style)FindResource("LanguageToggleActiveButtonStyle")
-            : (Style)FindResource("LanguageToggleButtonStyle");
-
-        LangEnButton.Style = !isTurkish
-            ? (Style)FindResource("LanguageToggleActiveButtonStyle")
-            : (Style)FindResource("LanguageToggleButtonStyle");
+        LangTrButton.Style = current == AppLanguage.Turkish ? active : inactive;
+        LangEnButton.Style = current == AppLanguage.English ? active : inactive;
+        LangZhButton.Style = current == AppLanguage.Chinese ? active : inactive;
+        LangRuButton.Style = current == AppLanguage.Russian ? active : inactive;
     }
 }

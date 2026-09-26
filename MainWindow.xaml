@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:loc="clr-namespace:ApexConfigTool.Services"
         Title="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[AppTitle]}"
+        Icon="AppIcon.ico"
         Width="1200"
         Height="780"
         MinWidth="1040"
@@ -100,12 +101,16 @@
                         </Border>
                     </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                    <UniformGrid Rows="2" Columns="2" Margin="0,0,0,8">
                         <Button x:Name="LangTrButton" Content="TR" Style="{StaticResource LanguageToggleButtonStyle}"
-                                Margin="0,0,6,0" Click="LangTrButton_Click"/>
+                                Margin="0,0,6,6" Click="LangTrButton_Click"/>
                         <Button x:Name="LangEnButton" Content="EN" Style="{StaticResource LanguageToggleButtonStyle}"
-                                Click="LangEnButton_Click"/>
-                    </StackPanel>
+                                Margin="0,0,0,6" Click="LangEnButton_Click"/>
+                        <Button x:Name="LangZhButton" Content="中文" Style="{StaticResource LanguageToggleButtonStyle}"
+                                Margin="0,0,6,0" Click="LangZhButton_Click"/>
+                        <Button x:Name="LangRuButton" Content="RU" Style="{StaticResource LanguageToggleButtonStyle}"
+                                Click="LangRuButton_Click"/>
+                    </UniformGrid>
 
                     <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[VersionLabel]}"
                                Foreground="{StaticResource FaintTextBrush}" FontSize="10.5" Margin="10,0,0,0"/>

@@ -3,5 +3,7 @@ namespace ApexConfigTool.Services;
 public enum AppLanguage
 {
     Turkish,
-    English
+    English,
+    Chinese,
+    Russian
 }

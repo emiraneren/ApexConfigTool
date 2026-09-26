@@ -4,7 +4,7 @@ Apex Legends için çalışan bir yapılandırma aracı. Ekran, grafik, gölge, 
 FOV/FPS/mouse gibi autoexec ayarlarını arayüzden düzenler; her değişiklikten önce otomatik
 yedek alır ve uygulamadan önce bir önizleme ekranı gösterir.
 
-Arayüz **Türkçe ve İngilizce**dir; sol alt köşedeki **TR / EN** düğmesiyle anında değiştirilebilir.
+Arayüz **Türkçe, İngilizce, Çince ve Rusça**dır; sol alt köşedeki **TR / EN / 中文 / RU** düğmeleriyle anında değiştirilebilir.
 
 **Geliştirici:** emirhaneren34@gmail.com
 
