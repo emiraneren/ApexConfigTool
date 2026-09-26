@@ -60,6 +60,11 @@ public class AutoexecDiffService
             "sprint_view_shake_style" => loc.T("DiffSprintViewShake"),
             "r_drawmodeldecals" => loc.T("DiffModelDecals"),
             "r_forcecheapwater" => loc.T("DiffWaterRendering"),
+            "mouse_sensitivity" => loc.T("DiffGeneralSensitivity"),
+            "mouse_use_per_scope_sensitivity_scalars" => loc.T("DiffPerScopeSensitivity"),
+            "cl_footstep_event_max_dist" => loc.T("DiffFootstepRange"),
+            "colorblind_mode" => loc.T("DiffColorblindMode"),
+            _ when command.StartsWith("mouse_zoomed_sensitivity_scalar_") => loc.T("DiffScopeSensitivity"),
             _ => command
         };
     }

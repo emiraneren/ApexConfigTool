@@ -183,13 +183,114 @@
 
             <Border Style="{StaticResource CardStyle}" Margin="0,16,0,0">
                 <StackPanel>
+                    <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[AutoSensitivity]}"
+                               Style="{StaticResource SectionTitleStyle}" Margin="0,0,0,15"/>
+
+                    <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[AutoGeneralSensitivity]}"
+                               Style="{StaticResource MutedTextStyle}"/>
+                    <TextBox x:Name="GeneralSensitivityBox" Margin="0,5,0,14"/>
+
+                    <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[AutoPerScopeSensitivity]}"
+                               Style="{StaticResource MutedTextStyle}"/>
+                    <ComboBox x:Name="PerScopeSensitivityCombo" Margin="0,5,0,16">
+                        <ComboBoxItem Style="{StaticResource KeepItem}"/>
+                        <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOff]}" Tag="0"/>
+                        <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOn]}" Tag="1"/>
+                    </ComboBox>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="16"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="16"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="16"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0" Grid.Column="0">
+                            <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[AutoScopeIron]}" Style="{StaticResource MutedTextStyle}"/>
+                            <TextBox x:Name="ScopeIronSensBox" Margin="0,5,0,0"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="0" Grid.Column="2">
+                            <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[AutoScope2x]}" Style="{StaticResource MutedTextStyle}"/>
+                            <TextBox x:Name="Scope2xSensBox" Margin="0,5,0,0"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="0" Grid.Column="4">
+                            <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[AutoScope3x]}" Style="{StaticResource MutedTextStyle}"/>
+                            <TextBox x:Name="Scope3xSensBox" Margin="0,5,0,0"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="0" Grid.Column="6">
+                            <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[AutoScope4x]}" Style="{StaticResource MutedTextStyle}"/>
+                            <TextBox x:Name="Scope4xSensBox" Margin="0,5,0,0"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="2" Grid.Column="0">
+                            <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[AutoScope6x]}" Style="{StaticResource MutedTextStyle}"/>
+                            <TextBox x:Name="Scope6xSensBox" Margin="0,5,0,0"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="2" Grid.Column="2">
+                            <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[AutoScope8x]}" Style="{StaticResource MutedTextStyle}"/>
+                            <TextBox x:Name="Scope8xSensBox" Margin="0,5,0,0"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="2" Grid.Column="4">
+                            <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[AutoScope10x]}" Style="{StaticResource MutedTextStyle}"/>
+                            <TextBox x:Name="Scope10xSensBox" Margin="0,5,0,0"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="2" Grid.Column="6">
+                            <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[AutoScopeSeer]}" Style="{StaticResource MutedTextStyle}"/>
+                            <TextBox x:Name="ScopeSeerSensBox" Margin="0,5,0,0"/>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource CardStyle}" Margin="0,16,0,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="16"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[AutoAudioAccessibility]}"
+                                   Style="{StaticResource SectionTitleStyle}" Margin="0,0,0,15"/>
+
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[AutoFootstepRange]}"
+                                   Style="{StaticResource MutedTextStyle}"/>
+                        <TextBox x:Name="FootstepRangeBox" Margin="0,5,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2" Margin="0,37,0,0">
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[AutoColorblindMode]}"
+                                   Style="{StaticResource MutedTextStyle}"/>
+                        <ComboBox x:Name="ColorblindModeCombo" Margin="0,5,0,0">
+                            <ComboBoxItem Style="{StaticResource KeepItem}"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOff]}" Tag="0"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[OptMode1]}" Tag="1"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[OptMode2]}" Tag="2"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[OptMode3]}" Tag="3"/>
+                        </ComboBox>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Border Style="{StaticResource CardStyle}" Margin="0,16,0,0">
+                <StackPanel>
                     <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[AutoAutoexecFile]}"
                                Style="{StaticResource SectionTitleStyle}" Margin="0,0,0,15"/>
                     <WrapPanel>
                         <Button Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[AutoReload]}"
-                                Width="90" Margin="0,0,8,8" Click="ReloadButton_Click"/>
+                                Width="115" Margin="0,0,8,8" Click="ReloadButton_Click"/>
                         <Button Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[AutoBackup]}"
-                                Width="90" Margin="0,0,8,8" Click="BackupButton_Click"/>
+                                Width="100" Margin="0,0,8,8" Click="BackupButton_Click"/>
                     </WrapPanel>
                 </StackPanel>
             </Border>

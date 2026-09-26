@@ -31,12 +31,38 @@ public partial class AutoexecView : UserControl
     private string loadedCheapWater = Keep;
     private string loadedFps = "180";
     private string loadedLobbyFps = "60";
+    private string loadedGeneralSensitivity = "";
+    private string loadedPerScopeToggle = Keep;
+    private string loadedFootstepRange = "";
+    private string loadedColorblindMode = Keep;
+
+    // mouse_zoomed_sensitivity_scalar_0..7: iç nişangah/1x, 2x, 3x, 4x, 6x, 8x, 10x, Seer pasifi (bu sırayla).
+    private TextBox[] scopeSensitivityBoxes = Array.Empty<TextBox>();
+    private readonly string[] scopeSensitivityCommands =
+    {
+        "mouse_zoomed_sensitivity_scalar_0",
+        "mouse_zoomed_sensitivity_scalar_1",
+        "mouse_zoomed_sensitivity_scalar_2",
+        "mouse_zoomed_sensitivity_scalar_3",
+        "mouse_zoomed_sensitivity_scalar_4",
+        "mouse_zoomed_sensitivity_scalar_5",
+        "mouse_zoomed_sensitivity_scalar_6",
+        "mouse_zoomed_sensitivity_scalar_7",
+    };
+    private string[] loadedScopeSensitivity = new string[8];
 
     public event Action<string>? StatusChanged;
 
     public AutoexecView()
     {
         InitializeComponent();
+
+        scopeSensitivityBoxes = new[]
+        {
+            ScopeIronSensBox, Scope2xSensBox, Scope3xSensBox, Scope4xSensBox,
+            Scope6xSensBox, Scope8xSensBox, Scope10xSensBox, ScopeSeerSensBox
+        };
+
         ResetCombos();
     }
 
@@ -51,6 +77,8 @@ public partial class AutoexecView : UserControl
         ViewShakeCombo.SelectedIndex = 0;
         ModelDecalsCombo.SelectedIndex = 0;
         CheapWaterCombo.SelectedIndex = 0;
+        PerScopeSensitivityCombo.SelectedIndex = 0;
+        ColorblindModeCombo.SelectedIndex = 0;
     }
 
     public void LoadInstallation(ApexInstallation apexInstallation)
@@ -107,6 +135,14 @@ public partial class AutoexecView : UserControl
         LoadComboCommand(ModelDecalsCombo, "r_drawmodeldecals");
         LoadComboCommand(CheapWaterCombo, "r_forcecheapwater");
 
+        LoadTextCommand(GeneralSensitivityBox, "mouse_sensitivity", "");
+        LoadComboCommand(PerScopeSensitivityCombo, "mouse_use_per_scope_sensitivity_scalars");
+        for (int i = 0; i < scopeSensitivityBoxes.Length; i++)
+            LoadTextCommand(scopeSensitivityBoxes[i], scopeSensitivityCommands[i], "");
+
+        LoadTextCommand(FootstepRangeBox, "cl_footstep_event_max_dist", "");
+        LoadComboCommand(ColorblindModeCombo, "colorblind_mode");
+
         CaptureLoadedState();
     }
 
@@ -123,6 +159,15 @@ public partial class AutoexecView : UserControl
         loadedCheapWater = GetComboValue(CheapWaterCombo);
         loadedFps = FpsCapBox.Text.Trim();
         loadedLobbyFps = LobbyFpsCapBox.Text.Trim();
+
+        loadedGeneralSensitivity = GeneralSensitivityBox.Text.Trim();
+        loadedPerScopeToggle = GetComboValue(PerScopeSensitivityCombo);
+
+        for (int i = 0; i < scopeSensitivityBoxes.Length; i++)
+            loadedScopeSensitivity[i] = scopeSensitivityBoxes[i].Text.Trim();
+
+        loadedFootstepRange = FootstepRangeBox.Text.Trim();
+        loadedColorblindMode = GetComboValue(ColorblindModeCombo);
     }
 
     private void LoadFov()
@@ -218,6 +263,40 @@ public partial class AutoexecView : UserControl
         commands[command] = current;
     }
 
+    /// <summary>
+    /// Kutudaki metni ondalıklı bir sayı olarak doğrular; boşsa komutu kaldırır,
+    /// aralık dışındaysa hata döner. Hassasiyet/menzil gibi tüm sayısal alanlar için ortak.
+    /// </summary>
+    private bool ApplyNumericTextChange(
+        Dictionary<string, string> commands, string command, TextBox textBox,
+        string loadedValue, double min, double max, out string error)
+    {
+        error = "";
+        string current = textBox.Text.Trim();
+
+        if (current == loadedValue)
+            return true;
+
+        if (string.IsNullOrWhiteSpace(current))
+        {
+            commands.Remove(command);
+            return true;
+        }
+
+        if (!double.TryParse(current, NumberStyles.Float, CultureInfo.InvariantCulture, out double value)
+            || value < min || value > max)
+        {
+            error = LocalizationService.Instance.F(
+                "StatusNumericRange",
+                min.ToString(CultureInfo.InvariantCulture),
+                max.ToString(CultureInfo.InvariantCulture));
+            return false;
+        }
+
+        commands[command] = value.ToString(CultureInfo.InvariantCulture);
+        return true;
+    }
+
     public bool TryBuildPendingContent(out string currentContent, out string pendingContent, out string error)
     {
         currentContent = "";
@@ -293,6 +372,21 @@ public partial class AutoexecView : UserControl
                 commands["lobby_max_fps"] = lobbyValue.ToString();
             }
         }
+
+        ApplyComboChange(commands, "mouse_use_per_scope_sensitivity_scalars", PerScopeSensitivityCombo, loadedPerScopeToggle);
+        ApplyComboChange(commands, "colorblind_mode", ColorblindModeCombo, loadedColorblindMode);
+
+        if (!ApplyNumericTextChange(commands, "mouse_sensitivity", GeneralSensitivityBox, loadedGeneralSensitivity, 0.01, 100, out error))
+            return false;
+
+        for (int i = 0; i < scopeSensitivityBoxes.Length; i++)
+        {
+            if (!ApplyNumericTextChange(commands, scopeSensitivityCommands[i], scopeSensitivityBoxes[i], loadedScopeSensitivity[i], 0.01, 10, out error))
+                return false;
+        }
+
+        if (!ApplyNumericTextChange(commands, "cl_footstep_event_max_dist", FootstepRangeBox, loadedFootstepRange, 0, 20000, out error))
+            return false;
 
         pendingContent = autoexecService.BuildManagedContent(currentContent, commands);
         return true;
