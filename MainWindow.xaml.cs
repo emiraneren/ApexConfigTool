@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 using ApexConfigTool.Models;
 using ApexConfigTool.Services;
 using ApexConfigTool.Views;
@@ -32,6 +33,11 @@ public partial class MainWindow : Window
     private readonly BackupsView backupsView = new();
     private readonly AdvancedView advancedView = new();
 
+    // Apex'in açık/kapalı durumu tek seferlik bir kontrolle değil, sürekli
+    // güncellenmeli — kullanıcı oyunu başlattıktan veya kapattıktan sonra
+    // hiçbir sayfa değiştirmese bile gösterge doğru kalsın diye.
+    private readonly DispatcherTimer processStatusTimer = new() { Interval = TimeSpan.FromSeconds(2) };
+
     public MainWindow()
     {
         InitializeComponent();
@@ -54,7 +60,10 @@ public partial class MainWindow : Window
 
         UpdateLanguageButtons();
 
+        processStatusTimer.Tick += ProcessStatusTimer_Tick;
+
         Loaded += MainWindow_Loaded;
+        Closed += (_, _) => processStatusTimer.Stop();
     }
 
     private void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -64,6 +73,16 @@ public partial class MainWindow : Window
 
         DetectConfig();
         ShowDashboard();
+
+        processStatusTimer.Start();
+    }
+
+    private void ProcessStatusTimer_Tick(object? sender, EventArgs e)
+    {
+        UpdateProcessStatus();
+
+        if (ReferenceEquals(MainContent.Content, dashboardView))
+            dashboardView.SetApexRunning(processService.IsApexRunning());
     }
 
     private void DetectConfig()

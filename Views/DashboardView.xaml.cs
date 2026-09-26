@@ -22,4 +22,13 @@ public partial class DashboardView : UserControl
         FovText.Text = string.IsNullOrWhiteSpace(fov) ? loc.T("CommonDefault") : fov;
         FpsText.Text = string.IsNullOrWhiteSpace(fps) ? loc.T("CommonDefault") : fps;
     }
+
+    /// <summary>
+    /// Yalnızca "Apex çalışıyor mu" kartını günceller. Periyodik canlı kontrol için
+    /// kullanılır — diğer alanları (çözünürlük, FOV vb.) sıfırlamadan, hafif bir güncelleme.
+    /// </summary>
+    public void SetApexRunning(bool apexRunning)
+    {
+        ApexStateText.Text = apexRunning ? LocalizationService.Instance.T("DashRunning") : LocalizationService.Instance.T("DashOff");
+    }
 }
