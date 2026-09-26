@@ -81,6 +81,23 @@ public static class Translations
         ["NavBackups"] = ("Yedekler", "Backups"),
         ["NavAdvanced"] = ("Gelişmiş", "Advanced"),
 
+        // Navigasyon grup başlıkları
+        ["NavGroupOverview"] = ("GENEL", "OVERVIEW"),
+        ["NavGroupSettings"] = ("AYARLAR", "SETTINGS"),
+        ["NavGroupGame"] = ("OYUN İÇİ", "IN-GAME"),
+        ["NavGroupManage"] = ("YÖNETİM", "MANAGE"),
+
+        // Sayfa alt başlıkları (PageHeader)
+        ["DashSubtitle"] = ("Apex kurulumunuzun ve config dosyalarınızın genel durumu.", "Overview of your Apex installation and config files."),
+        ["DisplaySubtitle"] = ("Çözünürlük ve pencere modu ayarları.", "Resolution and window mode settings."),
+        ["GraphicsSubtitle"] = ("Doku, render ve detay kalitesi ayarları.", "Texture, rendering and detail quality settings."),
+        ["ShadowsSubtitle"] = ("Gölge render kalitesi ile performans arasındaki dengeyi ayarlayın.", "Tune the balance between shadow rendering quality and performance."),
+        ["PerfSubtitle"] = ("Tek tıkla hazır performans önayarları yükleyin.", "Load ready-made performance presets with one click."),
+        ["AutoSubtitle"] = ("FOV, FPS limiti, giriş ve efekt ayarlarını autoexec.cfg üzerinden yönetin.", "Manage FOV, FPS limit, input and effect settings via autoexec.cfg."),
+        ["ProfSubtitle"] = ("Tüm yapılandırmanızı adlandırılmış profiller olarak kaydedin ve geri yükleyin.", "Save and restore your entire configuration as named profiles."),
+        ["BackupsSubtitle"] = ("Otomatik alınan yedekleri görüntüleyin, geri yükleyin veya silin.", "View, restore or delete your automatic backups."),
+        ["AdvSubtitle"] = ("Tüm ayarları arayın, inceleyin veya ham dosyayı doğrudan düzenleyin.", "Search, inspect every setting, or edit the raw file directly."),
+
         // Alt bar butonları
         ["BtnBackup"] = ("Yedekle", "Backup"),
         ["BtnRestore"] = ("Geri yükle", "Restore"),

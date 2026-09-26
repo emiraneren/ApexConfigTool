@@ -1,0 +1,42 @@
+<UserControl x:Class="ApexConfigTool.Views.PageHeader"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Name="Root">
+
+    <!--
+        Her sayfanın en üstünde kullanılan ortak başlık bloğu: kısa bir rozet (Badge),
+        başlık ve tek satırlık açıklama. Tutarlı bir "nerede olduğumu ve ne işe yaradığını"
+        hissi vermek için tüm sayfalarda aynı düzeni kullanır.
+    -->
+    <StackPanel Margin="0,0,0,26">
+
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+
+            <Border Width="42" Height="42"
+                    CornerRadius="12"
+                    Background="{StaticResource AccentSoftBrush}"
+                    BorderBrush="{StaticResource AccentBrush}"
+                    BorderThickness="1">
+                <TextBlock Text="{Binding Badge, ElementName=Root}"
+                           Foreground="{StaticResource AccentBrush}"
+                           FontWeight="Bold"
+                           FontSize="13"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+            </Border>
+
+            <TextBlock Text="{Binding Title, ElementName=Root}"
+                       Style="{StaticResource PageTitleStyle}"
+                       Margin="14,0,0,0"
+                       VerticalAlignment="Center"/>
+
+        </StackPanel>
+
+        <TextBlock Text="{Binding Subtitle, ElementName=Root}"
+                   Style="{StaticResource MutedTextStyle}"
+                   Margin="56,8,0,0"
+                   TextWrapping="Wrap"/>
+
+    </StackPanel>
+
+</UserControl>

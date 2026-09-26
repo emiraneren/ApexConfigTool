@@ -3,9 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:loc="clr-namespace:ApexConfigTool.Services"
         Title="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[AppTitle]}"
-        Width="1180"
-        Height="760"
-        MinWidth="1020"
+        Width="1200"
+        Height="780"
+        MinWidth="1040"
         MinHeight="640"
         WindowStartupLocation="CenterScreen"
         Background="{StaticResource BackgroundBrush}">
@@ -13,7 +13,7 @@
     <Grid>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="214"/>
+            <ColumnDefinition Width="222"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
@@ -35,51 +35,58 @@
                 <StackPanel>
 
                     <!-- Logo -->
-                    <Grid Margin="6,10,0,28">
+                    <Grid Margin="6,10,0,20">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="38"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Border Width="32" Height="32" Background="{StaticResource AccentBrush}"
-                                CornerRadius="8" VerticalAlignment="Center">
+                        <Border Width="34" Height="34" Background="{StaticResource AccentBrush}"
+                                CornerRadius="10" VerticalAlignment="Center">
                             <TextBlock Text="A" FontSize="17" FontWeight="Bold"
-                                       HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                                       HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#1A1206"/>
                         </Border>
 
                         <TextBlock Grid.Column="1"
                                    Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[AppTitle]}"
-                                   FontFamily="Segoe UI Variable Display" FontSize="20" FontWeight="SemiBold"
+                                   FontFamily="Segoe UI Variable Display" FontSize="19" FontWeight="SemiBold"
                                    VerticalAlignment="Center" Margin="10,0,0,0"/>
                     </Grid>
 
                     <!-- Navigasyon -->
-                    <RadioButton Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[NavDashboard]}"
+
+                    <RadioButton x:Name="NavDashboard" Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[NavDashboard]}" Tag="DB"
                                  GroupName="Navigation" IsChecked="True"
                                  Style="{StaticResource NavRadioButtonStyle}" Click="DashboardButton_Click"/>
 
-                    <RadioButton Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[NavDisplay]}"
+                    <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[NavGroupSettings]}" Style="{StaticResource NavGroupCaptionStyle}"/>
+
+                    <RadioButton x:Name="NavDisplay" Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[NavDisplay]}" Tag="DS"
                                  GroupName="Navigation" Style="{StaticResource NavRadioButtonStyle}" Click="DisplayButton_Click"/>
 
-                    <RadioButton Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[NavGraphics]}"
+                    <RadioButton x:Name="NavGraphics" Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[NavGraphics]}" Tag="GR"
                                  GroupName="Navigation" Style="{StaticResource NavRadioButtonStyle}" Click="GraphicsButton_Click"/>
 
-                    <RadioButton Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[NavShadows]}"
+                    <RadioButton x:Name="NavShadows" Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[NavShadows]}" Tag="SH"
                                  GroupName="Navigation" Style="{StaticResource NavRadioButtonStyle}" Click="ShadowsButton_Click"/>
 
-                    <RadioButton Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[NavPerformance]}"
+                    <RadioButton x:Name="NavPerformance" Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[NavPerformance]}" Tag="PF"
                                  GroupName="Navigation" Style="{StaticResource NavRadioButtonStyle}" Click="PerformanceButton_Click"/>
 
-                    <RadioButton Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[NavAutoexec]}"
+                    <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[NavGroupGame]}" Style="{StaticResource NavGroupCaptionStyle}"/>
+
+                    <RadioButton x:Name="NavAutoexec" Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[NavAutoexec]}" Tag="AE"
                                  GroupName="Navigation" Style="{StaticResource NavRadioButtonStyle}" Click="AutoexecButton_Click"/>
 
-                    <RadioButton Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[NavProfiles]}"
+                    <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[NavGroupManage]}" Style="{StaticResource NavGroupCaptionStyle}"/>
+
+                    <RadioButton x:Name="NavProfiles" Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[NavProfiles]}" Tag="PR"
                                  GroupName="Navigation" Style="{StaticResource NavRadioButtonStyle}" Click="ProfilesButton_Click"/>
 
-                    <RadioButton Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[NavBackups]}"
+                    <RadioButton x:Name="NavBackups" Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[NavBackups]}" Tag="BK"
                                  GroupName="Navigation" Style="{StaticResource NavRadioButtonStyle}" Click="BackupsButton_Click"/>
 
-                    <RadioButton Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[NavAdvanced]}"
+                    <RadioButton x:Name="NavAdvanced" Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[NavAdvanced]}" Tag="AD"
                                  GroupName="Navigation" Style="{StaticResource NavRadioButtonStyle}" Click="AdvancedButton_Click"/>
 
                 </StackPanel>
@@ -115,13 +122,15 @@
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="72"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <ContentControl x:Name="MainContent" Grid.Row="0"/>
 
-            <!-- Alt eylem çubuğu -->
-            <Border Grid.Row="1"
+            <!-- Bağlamsal alt eylem çubuğu: yalnızca video/autoexec ayarı barındıran
+                 sayfalarda görünür (Profiller/Yedekler/Gelişmiş kendi eylemlerini içerir). -->
+            <Border x:Name="ActionBar"
+                    Grid.Row="1"
                     Background="{StaticResource SidebarBrush}"
                     BorderBrush="{StaticResource BorderBrush}"
                     BorderThickness="0,1,0,0">
@@ -150,7 +159,7 @@
                                 Style="{StaticResource AccentOutlineButtonStyle}" Click="ApplyButton_Click"/>
 
                         <Button Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[BtnApplyLaunch]}"
-                                Width="150" Height="40" Margin="4,0"
+                                Width="155" Height="40" Margin="4,0"
                                 Style="{StaticResource PrimaryButtonStyle}" Click="ApplyLaunchButton_Click"/>
 
                     </StackPanel>

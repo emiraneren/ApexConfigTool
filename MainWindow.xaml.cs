@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Windows;
+using System.Windows.Controls;
 using ApexConfigTool.Models;
 using ApexConfigTool.Services;
 using ApexConfigTool.Views;
@@ -323,7 +324,19 @@ public partial class MainWindow : Window
         }
     }
 
-    private void ShowDashboard() => MainContent.Content = dashboardView;
+    /// <summary>
+    /// Bir sayfaya geçer. Alt eylem çubuğu (Yedekle/Geri yükle/Uygula) yalnızca
+    /// video config veya autoexec'e dokunan sayfalarda gösterilir — Profiller,
+    /// Yedekler ve Gelişmiş sayfalarının zaten kendi eylem düğmeleri var, orada
+    /// aynı işi yapan ikinci bir bar sadece kafa karıştırır.
+    /// </summary>
+    private void Navigate(UserControl view, bool showActionBar)
+    {
+        MainContent.Content = view;
+        ActionBar.Visibility = showActionBar ? Visibility.Visible : Visibility.Collapsed;
+    }
+
+    private void ShowDashboard() => Navigate(dashboardView, true);
 
     private void DashboardButton_Click(object sender, RoutedEventArgs e)
     {
@@ -331,32 +344,32 @@ public partial class MainWindow : Window
         ShowDashboard();
     }
 
-    private void DisplayButton_Click(object sender, RoutedEventArgs e) => MainContent.Content = displayView;
+    private void DisplayButton_Click(object sender, RoutedEventArgs e) => Navigate(displayView, true);
 
-    private void GraphicsButton_Click(object sender, RoutedEventArgs e) => MainContent.Content = graphicsView;
+    private void GraphicsButton_Click(object sender, RoutedEventArgs e) => Navigate(graphicsView, true);
 
-    private void ShadowsButton_Click(object sender, RoutedEventArgs e) => MainContent.Content = shadowsView;
+    private void ShadowsButton_Click(object sender, RoutedEventArgs e) => Navigate(shadowsView, true);
 
-    private void PerformanceButton_Click(object sender, RoutedEventArgs e) => MainContent.Content = performanceView;
+    private void PerformanceButton_Click(object sender, RoutedEventArgs e) => Navigate(performanceView, true);
 
-    private void AutoexecButton_Click(object sender, RoutedEventArgs e) => MainContent.Content = autoexecView;
+    private void AutoexecButton_Click(object sender, RoutedEventArgs e) => Navigate(autoexecView, true);
 
     private void ProfilesButton_Click(object sender, RoutedEventArgs e)
     {
         profilesView.RefreshProfiles();
-        MainContent.Content = profilesView;
+        Navigate(profilesView, false);
     }
 
     private void BackupsButton_Click(object sender, RoutedEventArgs e)
     {
         backupsView.RefreshLists();
-        MainContent.Content = backupsView;
+        Navigate(backupsView, false);
     }
 
     private void AdvancedButton_Click(object sender, RoutedEventArgs e)
     {
         advancedView.ReloadEverything();
-        MainContent.Content = advancedView;
+        Navigate(advancedView, false);
     }
 
     private void ChildView_StatusChanged(string message) => StatusText.Text = message;
