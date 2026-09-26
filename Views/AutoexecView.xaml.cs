@@ -35,6 +35,19 @@ public partial class AutoexecView : UserControl
     private string loadedPerScopeToggle = Keep;
     private string loadedFootstepRange = "";
     private string loadedColorblindMode = Keep;
+    private string loadedNvidiaReflex = Keep;
+    private string loadedNvidiaReflexBoost = Keep;
+    private string loadedAmdLowLatency = Keep;
+    private string loadedMaxPrerenderedFrames = "";
+    private string loadedBloodEffects = Keep;
+    private string loadedOwnTracers = Keep;
+    private string loadedBulletCasings = Keep;
+    private string loadedWaterSplashes = Keep;
+    private string loadedAutoSprint = Keep;
+    private string loadedReticleColor = "";
+
+    private static readonly string[] BloodEffectCommands =
+        { "violence_ablood", "violence_agibs", "violence_hblood", "violence_hgibs" };
 
     // mouse_zoomed_sensitivity_scalar_0..7: iç nişangah/1x, 2x, 3x, 4x, 6x, 8x, 10x, Seer pasifi (bu sırayla).
     private TextBox[] scopeSensitivityBoxes = Array.Empty<TextBox>();
@@ -79,6 +92,14 @@ public partial class AutoexecView : UserControl
         CheapWaterCombo.SelectedIndex = 0;
         PerScopeSensitivityCombo.SelectedIndex = 0;
         ColorblindModeCombo.SelectedIndex = 0;
+        NvidiaReflexCombo.SelectedIndex = 0;
+        NvidiaReflexBoostCombo.SelectedIndex = 0;
+        AmdLowLatencyCombo.SelectedIndex = 0;
+        BloodEffectsCombo.SelectedIndex = 0;
+        OwnTracersCombo.SelectedIndex = 0;
+        BulletCasingsCombo.SelectedIndex = 0;
+        WaterSplashesCombo.SelectedIndex = 0;
+        AutoSprintCombo.SelectedIndex = 0;
     }
 
     public void LoadInstallation(ApexInstallation apexInstallation)
@@ -143,6 +164,19 @@ public partial class AutoexecView : UserControl
         LoadTextCommand(FootstepRangeBox, "cl_footstep_event_max_dist", "");
         LoadComboCommand(ColorblindModeCombo, "colorblind_mode");
 
+        LoadComboCommand(NvidiaReflexCombo, "gfx_nvnUseLowLatency");
+        LoadComboCommand(NvidiaReflexBoostCombo, "gfx_nvnUseLowLatencyBoost");
+        LoadComboCommand(AmdLowLatencyCombo, "gfx_amdUseLowLatency");
+        LoadTextCommand(MaxPrerenderedFramesBox, "r_dxgi_max_frame_latency", "");
+
+        LoadComboCommand(BloodEffectsCombo, BloodEffectCommands[0]);
+        LoadComboCommand(OwnTracersCombo, "r_drawtracers_firstperson");
+        LoadComboCommand(BulletCasingsCombo, "cl_ejectbrass");
+        LoadComboCommand(WaterSplashesCombo, "cl_show_splashes");
+
+        LoadComboCommand(AutoSprintCombo, "player_setting_autosprint");
+        LoadTextCommand(ReticleColorBox, "reticle_color", "");
+
         CaptureLoadedState();
     }
 
@@ -168,6 +202,19 @@ public partial class AutoexecView : UserControl
 
         loadedFootstepRange = FootstepRangeBox.Text.Trim();
         loadedColorblindMode = GetComboValue(ColorblindModeCombo);
+
+        loadedNvidiaReflex = GetComboValue(NvidiaReflexCombo);
+        loadedNvidiaReflexBoost = GetComboValue(NvidiaReflexBoostCombo);
+        loadedAmdLowLatency = GetComboValue(AmdLowLatencyCombo);
+        loadedMaxPrerenderedFrames = MaxPrerenderedFramesBox.Text.Trim();
+
+        loadedBloodEffects = GetComboValue(BloodEffectsCombo);
+        loadedOwnTracers = GetComboValue(OwnTracersCombo);
+        loadedBulletCasings = GetComboValue(BulletCasingsCombo);
+        loadedWaterSplashes = GetComboValue(WaterSplashesCombo);
+
+        loadedAutoSprint = GetComboValue(AutoSprintCombo);
+        loadedReticleColor = ReticleColorBox.Text.Trim();
     }
 
     private void LoadFov()
@@ -261,6 +308,28 @@ public partial class AutoexecView : UserControl
         }
 
         commands[command] = current;
+    }
+
+    /// <summary>
+    /// Tek bir açık/kapalı seçiminin birden fazla komuta birden yazılması gerektiğinde
+    /// kullanılır (örn. "Kan efektleri" aslında 4 ayrı violence_* komutunu birlikte değiştirir).
+    /// Yüklü durum, gruptaki ilk komutun değeriyle temsil edilir.
+    /// </summary>
+    private void ApplyGroupComboChange(Dictionary<string, string> commands, string[] commandNames, ComboBox combo, string loadedValue)
+    {
+        string current = GetComboValue(combo);
+        if (current == loadedValue)
+            return;
+
+        if (current == Keep)
+        {
+            foreach (string command in commandNames)
+                commands.Remove(command);
+            return;
+        }
+
+        foreach (string command in commandNames)
+            commands[command] = current;
     }
 
     /// <summary>
@@ -388,7 +457,55 @@ public partial class AutoexecView : UserControl
         if (!ApplyNumericTextChange(commands, "cl_footstep_event_max_dist", FootstepRangeBox, loadedFootstepRange, 0, 20000, out error))
             return false;
 
+        ApplyComboChange(commands, "gfx_nvnUseLowLatency", NvidiaReflexCombo, loadedNvidiaReflex);
+        ApplyComboChange(commands, "gfx_nvnUseLowLatencyBoost", NvidiaReflexBoostCombo, loadedNvidiaReflexBoost);
+        ApplyComboChange(commands, "gfx_amdUseLowLatency", AmdLowLatencyCombo, loadedAmdLowLatency);
+
+        if (!ApplyNumericTextChange(commands, "r_dxgi_max_frame_latency", MaxPrerenderedFramesBox, loadedMaxPrerenderedFrames, 0, 16, out error))
+            return false;
+
+        ApplyGroupComboChange(commands, BloodEffectCommands, BloodEffectsCombo, loadedBloodEffects);
+        ApplyComboChange(commands, "r_drawtracers_firstperson", OwnTracersCombo, loadedOwnTracers);
+        ApplyComboChange(commands, "cl_ejectbrass", BulletCasingsCombo, loadedBulletCasings);
+        ApplyComboChange(commands, "cl_show_splashes", WaterSplashesCombo, loadedWaterSplashes);
+
+        ApplyComboChange(commands, "player_setting_autosprint", AutoSprintCombo, loadedAutoSprint);
+
+        string reticleColor = ReticleColorBox.Text.Trim();
+        if (reticleColor != loadedReticleColor)
+        {
+            if (string.IsNullOrWhiteSpace(reticleColor))
+            {
+                commands.Remove("reticle_color");
+            }
+            else if (!IsValidReticleColor(reticleColor))
+            {
+                error = loc.T("StatusInvalidReticleColor");
+                return false;
+            }
+            else
+            {
+                commands["reticle_color"] = reticleColor;
+            }
+        }
+
         pendingContent = autoexecService.BuildManagedContent(currentContent, commands);
+        return true;
+    }
+
+    /// <summary>"R G B" biçiminde, her biri 0-255 aralığında üç tam sayı olmalı.</summary>
+    private bool IsValidReticleColor(string value)
+    {
+        string[] parts = value.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        if (parts.Length != 3)
+            return false;
+
+        foreach (string part in parts)
+        {
+            if (!int.TryParse(part, out int component) || component < 0 || component > 255)
+                return false;
+        }
+
         return true;
     }
 

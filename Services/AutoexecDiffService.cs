@@ -64,6 +64,16 @@ public class AutoexecDiffService
             "mouse_use_per_scope_sensitivity_scalars" => loc.T("DiffPerScopeSensitivity"),
             "cl_footstep_event_max_dist" => loc.T("DiffFootstepRange"),
             "colorblind_mode" => loc.T("DiffColorblindMode"),
+            "gfx_nvnUseLowLatency" => loc.T("DiffNvidiaReflex"),
+            "gfx_nvnUseLowLatencyBoost" => loc.T("DiffNvidiaReflexBoost"),
+            "gfx_amdUseLowLatency" => loc.T("DiffAmdLowLatency"),
+            "r_dxgi_max_frame_latency" => loc.T("DiffMaxPrerenderedFrames"),
+            "violence_ablood" or "violence_agibs" or "violence_hblood" or "violence_hgibs" => loc.T("DiffBloodEffects"),
+            "r_drawtracers_firstperson" => loc.T("DiffOwnTracers"),
+            "cl_ejectbrass" => loc.T("DiffBulletCasings"),
+            "cl_show_splashes" => loc.T("DiffWaterSplashes"),
+            "player_setting_autosprint" => loc.T("DiffAutoSprint"),
+            "reticle_color" => loc.T("DiffReticleColor"),
             _ when command.StartsWith("mouse_zoomed_sensitivity_scalar_") => loc.T("DiffScopeSensitivity"),
             _ => command
         };

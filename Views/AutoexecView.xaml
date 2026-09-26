@@ -282,6 +282,117 @@
                 </Grid>
             </Border>
 
+            <Grid Margin="0,16,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="16"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[AutoLowLatency]}"
+                                   Style="{StaticResource SectionTitleStyle}" Margin="0,0,0,15"/>
+
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[AutoNvidiaReflex]}"
+                                   Style="{StaticResource MutedTextStyle}"/>
+                        <ComboBox x:Name="NvidiaReflexCombo" Margin="0,5,0,14">
+                            <ComboBoxItem Style="{StaticResource KeepItem}"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOff]}" Tag="0"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOn]}" Tag="1"/>
+                        </ComboBox>
+
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[AutoNvidiaReflexBoost]}"
+                                   Style="{StaticResource MutedTextStyle}"/>
+                        <ComboBox x:Name="NvidiaReflexBoostCombo" Margin="0,5,0,14">
+                            <ComboBoxItem Style="{StaticResource KeepItem}"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOff]}" Tag="0"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOn]}" Tag="1"/>
+                        </ComboBox>
+
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[AutoAmdLowLatency]}"
+                                   Style="{StaticResource MutedTextStyle}"/>
+                        <ComboBox x:Name="AmdLowLatencyCombo" Margin="0,5,0,14">
+                            <ComboBoxItem Style="{StaticResource KeepItem}"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOff]}" Tag="0"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOn]}" Tag="1"/>
+                        </ComboBox>
+
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[AutoMaxPrerenderedFrames]}"
+                                   Style="{StaticResource MutedTextStyle}"/>
+                        <TextBox x:Name="MaxPrerenderedFramesBox" Margin="0,5,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="2" Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[AutoVisualClarity]}"
+                                   Style="{StaticResource SectionTitleStyle}" Margin="0,0,0,15"/>
+
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[AutoBloodEffects]}"
+                                   Style="{StaticResource MutedTextStyle}"/>
+                        <ComboBox x:Name="BloodEffectsCombo" Margin="0,5,0,14">
+                            <ComboBoxItem Style="{StaticResource KeepItem}"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOff]}" Tag="0"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOn]}" Tag="1"/>
+                        </ComboBox>
+
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[AutoOwnTracers]}"
+                                   Style="{StaticResource MutedTextStyle}"/>
+                        <ComboBox x:Name="OwnTracersCombo" Margin="0,5,0,14">
+                            <ComboBoxItem Style="{StaticResource KeepItem}"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOff]}" Tag="0"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOn]}" Tag="1"/>
+                        </ComboBox>
+
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[AutoBulletCasings]}"
+                                   Style="{StaticResource MutedTextStyle}"/>
+                        <ComboBox x:Name="BulletCasingsCombo" Margin="0,5,0,14">
+                            <ComboBoxItem Style="{StaticResource KeepItem}"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOff]}" Tag="0"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOn]}" Tag="1"/>
+                        </ComboBox>
+
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[AutoWaterSplashes]}"
+                                   Style="{StaticResource MutedTextStyle}"/>
+                        <ComboBox x:Name="WaterSplashesCombo">
+                            <ComboBoxItem Style="{StaticResource KeepItem}"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOff]}" Tag="0"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOn]}" Tag="1"/>
+                        </ComboBox>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <Border Style="{StaticResource CardStyle}" Margin="0,16,0,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="16"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[AutoQualityOfLife]}"
+                                   Style="{StaticResource SectionTitleStyle}" Margin="0,0,0,15"/>
+
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[AutoAutoSprint]}"
+                                   Style="{StaticResource MutedTextStyle}"/>
+                        <ComboBox x:Name="AutoSprintCombo" Margin="0,5,0,0">
+                            <ComboBoxItem Style="{StaticResource KeepItem}"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOff]}" Tag="0"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOn]}" Tag="1"/>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2" Margin="0,37,0,0">
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[AutoReticleColor]}"
+                                   Style="{StaticResource MutedTextStyle}"/>
+                        <TextBox x:Name="ReticleColorBox" Margin="0,5,0,0"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
             <Border Style="{StaticResource CardStyle}" Margin="0,16,0,0">
                 <StackPanel>
                     <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[AutoAutoexecFile]}"

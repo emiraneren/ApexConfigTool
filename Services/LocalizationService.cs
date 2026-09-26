@@ -255,6 +255,22 @@ public static class Translations
         ["OptMode2"] = ("Mod 2", "Mode 2", "模式 2", "Режим 2"),
         ["OptMode3"] = ("Mod 3", "Mode 3", "模式 3", "Режим 3"),
 
+        ["AutoLowLatency"] = ("Düşük gecikme", "Low latency", "低延迟", "Низкая задержка"),
+        ["AutoNvidiaReflex"] = ("NVIDIA Reflex", "NVIDIA Reflex", "NVIDIA Reflex", "NVIDIA Reflex"),
+        ["AutoNvidiaReflexBoost"] = ("NVIDIA Reflex Boost", "NVIDIA Reflex Boost", "NVIDIA Reflex Boost", "NVIDIA Reflex Boost"),
+        ["AutoAmdLowLatency"] = ("AMD Anti-Lag", "AMD Anti-Lag", "AMD Anti-Lag", "AMD Anti-Lag"),
+        ["AutoMaxPrerenderedFrames"] = ("Maks. ön render edilmiş kare", "Max pre-rendered frames", "最大预渲染帧数", "Макс. предварительно отрисованных кадров"),
+
+        ["AutoVisualClarity"] = ("Görsel sadelik", "Visual clarity", "画面简洁化", "Визуальная чистота"),
+        ["AutoBloodEffects"] = ("Kan ve yara efektleri", "Blood & gore effects", "血液与伤口效果", "Эффекты крови и ран"),
+        ["AutoOwnTracers"] = ("Kendi mermi izleriniz", "Your own bullet tracers", "自己的弹道轨迹", "Собственные трассеры пуль"),
+        ["AutoBulletCasings"] = ("Boşalan kovan efekti", "Ejected bullet casings", "弹壳抛出效果", "Вылетающие гильзы"),
+        ["AutoWaterSplashes"] = ("Su sıçraması efekti", "Water splash effects", "水花效果", "Всплески воды"),
+
+        ["AutoQualityOfLife"] = ("Diğer", "Miscellaneous", "其他", "Прочее"),
+        ["AutoAutoSprint"] = ("Otomatik koşu", "Auto-sprint", "自动疾跑", "Автобег"),
+        ["AutoReticleColor"] = ("Nişangah rengi (R G B)", "Reticle color (R G B)", "准星颜色（R G B）", "Цвет прицела (R G B)"),
+
         ["AutoAutoexecFile"] = ("Autoexec dosyası", "Autoexec file", "Autoexec 文件", "Файл autoexec"),
         ["AutoReload"] = ("Yeniden yükle", "Reload", "重新加载", "Обновить"),
         ["AutoBackup"] = ("Yedekle", "Backup", "备份", "Резерв. копия"),
@@ -345,6 +361,16 @@ public static class Translations
         ["DiffScopeSensitivity"] = ("Nişangah hassasiyeti", "Scope sensitivity", "倍镜灵敏度", "Чувствительность прицела"),
         ["DiffFootstepRange"] = ("Ayak sesi menzili", "Footstep range", "脚步声距离", "Дальность шагов"),
         ["DiffColorblindMode"] = ("Renk körlüğü modu", "Colorblind mode", "色盲模式", "Режим для дальтоников"),
+        ["DiffNvidiaReflex"] = ("NVIDIA Reflex", "NVIDIA Reflex", "NVIDIA Reflex", "NVIDIA Reflex"),
+        ["DiffNvidiaReflexBoost"] = ("NVIDIA Reflex Boost", "NVIDIA Reflex Boost", "NVIDIA Reflex Boost", "NVIDIA Reflex Boost"),
+        ["DiffAmdLowLatency"] = ("AMD Anti-Lag", "AMD Anti-Lag", "AMD Anti-Lag", "AMD Anti-Lag"),
+        ["DiffMaxPrerenderedFrames"] = ("Maks. ön render edilmiş kare", "Max pre-rendered frames", "最大预渲染帧数", "Макс. предв. отрисованных кадров"),
+        ["DiffBloodEffects"] = ("Kan ve yara efektleri", "Blood & gore effects", "血液与伤口效果", "Эффекты крови и ран"),
+        ["DiffOwnTracers"] = ("Kendi mermi izleriniz", "Your own bullet tracers", "自己的弹道轨迹", "Собственные трассеры пуль"),
+        ["DiffBulletCasings"] = ("Boşalan kovan efekti", "Ejected bullet casings", "弹壳抛出效果", "Вылетающие гильзы"),
+        ["DiffWaterSplashes"] = ("Su sıçraması efekti", "Water splash effects", "水花效果", "Всплески воды"),
+        ["DiffAutoSprint"] = ("Otomatik koşu", "Auto-sprint", "自动疾跑", "Автобег"),
+        ["DiffReticleColor"] = ("Nişangah rengi", "Reticle color", "准星颜色", "Цвет прицела"),
         ["DiffDefault"] = ("(varsayılan)", "(default)", "（默认）", "(по умолчанию)"),
         ["DiffMissing"] = ("(eksik)", "(missing)", "（缺失）", "(отсутствует)"),
 
@@ -380,6 +406,7 @@ public static class Translations
         ["StatusFpsRange"] = ("FPS limiti 30 ile 1000 arasında olmalıdır.", "FPS limit must be between 30 and 1000.", "帧率上限必须介于 30 到 1000 之间。", "Лимит FPS должен быть от 30 до 1000."),
         ["StatusLobbyFpsRange"] = ("Lobi FPS limiti 20 ile 300 arasında olmalıdır.", "Lobby FPS limit must be between 20 and 300.", "大厅帧率上限必须介于 20 到 300 之间。", "Лимит FPS в лобби должен быть от 20 до 300."),
         ["StatusNumericRange"] = ("Değer {0} ile {1} arasında olmalıdır.", "Value must be between {0} and {1}.", "数值必须介于 {0} 到 {1} 之间。", "Значение должно быть от {0} до {1}."),
+        ["StatusInvalidReticleColor"] = ("Nişangah rengi \"R G B\" biçiminde, her biri 0-255 arası üç sayı olmalıdır (örn. \"0 255 0\").", "Reticle color must be \"R G B\" — three numbers between 0-255 (e.g. \"0 255 0\").", "准星颜色必须为“R G B”格式，三个数字均在 0-255 之间（例如 \"0 255 0\"）。", "Цвет прицела должен быть в формате «R G B» — три числа от 0 до 255 (например, \"0 255 0\")."),
         ["StatusCouldNotOpenFolder"] = ("Klasör açılamadı: {0}", "Could not open folder: {0}", "无法打开文件夹：{0}", "Не удалось открыть папку: {0}"),
 
         // Autoexec görünümü durum mesajları

@@ -191,5 +191,7 @@ public class AutoexecService
 
     private bool IsValidCommandName(string command) => Regex.IsMatch(command, "^[A-Za-z0-9_]+$");
 
-    private bool IsSafeValue(string value) => Regex.IsMatch(value, "^[A-Za-z0-9_.\\-]+$");
+    // Boşluğa izin veriliyor: "reticle_color" gibi bazı komutlar "R G B" biçiminde
+    // üç sayı alır. Tırnak, noktalı virgül gibi komut enjeksiyonuna açık karakterler yasak.
+    private bool IsSafeValue(string value) => Regex.IsMatch(value, "^[A-Za-z0-9_.\\- ]+$");
 }
