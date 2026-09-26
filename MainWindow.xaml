@@ -1,0 +1,166 @@
+<Window x:Class="ApexConfigTool.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:loc="clr-namespace:ApexConfigTool.Services"
+        Title="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[AppTitle]}"
+        Width="1180"
+        Height="760"
+        MinWidth="1020"
+        MinHeight="640"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource BackgroundBrush}">
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="214"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Kenar çubuğu -->
+
+        <Border Grid.Column="0"
+                Background="{StaticResource SidebarBrush}"
+                BorderBrush="{StaticResource BorderBrush}"
+                BorderThickness="0,0,1,0">
+
+            <Grid Margin="14">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel>
+
+                    <!-- Logo -->
+                    <Grid Margin="6,10,0,28">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="38"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Width="32" Height="32" Background="{StaticResource AccentBrush}"
+                                CornerRadius="8" VerticalAlignment="Center">
+                            <TextBlock Text="A" FontSize="17" FontWeight="Bold"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                        </Border>
+
+                        <TextBlock Grid.Column="1"
+                                   Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[AppTitle]}"
+                                   FontFamily="Segoe UI Variable Display" FontSize="20" FontWeight="SemiBold"
+                                   VerticalAlignment="Center" Margin="10,0,0,0"/>
+                    </Grid>
+
+                    <!-- Navigasyon -->
+                    <RadioButton Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[NavDashboard]}"
+                                 GroupName="Navigation" IsChecked="True"
+                                 Style="{StaticResource NavRadioButtonStyle}" Click="DashboardButton_Click"/>
+
+                    <RadioButton Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[NavDisplay]}"
+                                 GroupName="Navigation" Style="{StaticResource NavRadioButtonStyle}" Click="DisplayButton_Click"/>
+
+                    <RadioButton Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[NavGraphics]}"
+                                 GroupName="Navigation" Style="{StaticResource NavRadioButtonStyle}" Click="GraphicsButton_Click"/>
+
+                    <RadioButton Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[NavShadows]}"
+                                 GroupName="Navigation" Style="{StaticResource NavRadioButtonStyle}" Click="ShadowsButton_Click"/>
+
+                    <RadioButton Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[NavPerformance]}"
+                                 GroupName="Navigation" Style="{StaticResource NavRadioButtonStyle}" Click="PerformanceButton_Click"/>
+
+                    <RadioButton Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[NavAutoexec]}"
+                                 GroupName="Navigation" Style="{StaticResource NavRadioButtonStyle}" Click="AutoexecButton_Click"/>
+
+                    <RadioButton Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[NavProfiles]}"
+                                 GroupName="Navigation" Style="{StaticResource NavRadioButtonStyle}" Click="ProfilesButton_Click"/>
+
+                    <RadioButton Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[NavBackups]}"
+                                 GroupName="Navigation" Style="{StaticResource NavRadioButtonStyle}" Click="BackupsButton_Click"/>
+
+                    <RadioButton Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[NavAdvanced]}"
+                                 GroupName="Navigation" Style="{StaticResource NavRadioButtonStyle}" Click="AdvancedButton_Click"/>
+
+                </StackPanel>
+
+                <!-- Alt -->
+                <StackPanel Grid.Row="2" Margin="6,12">
+
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <Border Style="{StaticResource StatusPillStyle}" HorizontalAlignment="Left">
+                            <TextBlock x:Name="ApexProcessText" FontSize="11.5" Foreground="{StaticResource MutedTextBrush}"/>
+                        </Border>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                        <Button x:Name="LangTrButton" Content="TR" Style="{StaticResource LanguageToggleButtonStyle}"
+                                Margin="0,0,6,0" Click="LangTrButton_Click"/>
+                        <Button x:Name="LangEnButton" Content="EN" Style="{StaticResource LanguageToggleButtonStyle}"
+                                Click="LangEnButton_Click"/>
+                    </StackPanel>
+
+                    <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[VersionLabel]}"
+                               Foreground="{StaticResource FaintTextBrush}" FontSize="10.5" Margin="10,0,0,0"/>
+
+                </StackPanel>
+
+            </Grid>
+
+        </Border>
+
+        <!-- İçerik -->
+
+        <Grid Grid.Column="1">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="72"/>
+            </Grid.RowDefinitions>
+
+            <ContentControl x:Name="MainContent" Grid.Row="0"/>
+
+            <!-- Alt eylem çubuğu -->
+            <Border Grid.Row="1"
+                    Background="{StaticResource SidebarBrush}"
+                    BorderBrush="{StaticResource BorderBrush}"
+                    BorderThickness="0,1,0,0">
+
+                <Grid Margin="22,10">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock x:Name="StatusText"
+                               Foreground="{StaticResource MutedTextBrush}"
+                               VerticalAlignment="Center" TextWrapping="Wrap" FontSize="12"/>
+
+                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+
+                        <Button Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[BtnBackup]}"
+                                Width="90" Height="40" Margin="4,0" Click="BackupButton_Click"/>
+
+                        <Button Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[BtnRestore]}"
+                                Width="90" Height="40" Margin="4,0" Click="RestoreButton_Click"/>
+
+                        <Button Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[BtnApply]}"
+                                Width="105" Height="40" Margin="4,0"
+                                Style="{StaticResource AccentOutlineButtonStyle}" Click="ApplyButton_Click"/>
+
+                        <Button Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[BtnApplyLaunch]}"
+                                Width="150" Height="40" Margin="4,0"
+                                Style="{StaticResource PrimaryButtonStyle}" Click="ApplyLaunchButton_Click"/>
+
+                    </StackPanel>
+
+                </Grid>
+
+            </Border>
+
+        </Grid>
+
+    </Grid>
+
+</Window>

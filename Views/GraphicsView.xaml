@@ -1,0 +1,207 @@
+<UserControl x:Class="ApexConfigTool.Views.GraphicsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:loc="clr-namespace:ApexConfigTool.Services">
+
+    <UserControl.Resources>
+        <Style x:Key="KeepItem" TargetType="ComboBoxItem">
+            <Setter Property="Content" Value="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonKeepCurrent]}"/>
+            <Setter Property="Tag" Value="__KEEP__"/>
+        </Style>
+    </UserControl.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+
+        <StackPanel Margin="34">
+
+            <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[GraphicsTitle]}"
+                       Style="{StaticResource PageTitleStyle}"
+                       Margin="0,0,0,28"/>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="16"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[GraphicsTextures]}"
+                                   Style="{StaticResource SectionTitleStyle}" Margin="0,0,0,15"/>
+
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[GraphicsStreamBudget]}"
+                                   Style="{StaticResource MutedTextStyle}"/>
+                        <ComboBox x:Name="TextureBudgetCombo" Margin="0,5,0,14">
+                            <ComboBoxItem Style="{StaticResource KeepItem}"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[OptNone]}" Tag="0"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[OptVeryLow]}" Tag="160000"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[OptLow]}" Tag="300000"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[OptMedium]}" Tag="600000"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[OptHigh]}" Tag="1000000"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[OptVeryHigh]}" Tag="2000000"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[OptUltra]}" Tag="3000000"/>
+                        </ComboBox>
+
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[GraphicsFiltering]}"
+                                   Style="{StaticResource MutedTextStyle}"/>
+                        <ComboBox x:Name="TextureFilteringCombo" Margin="0,5,0,14">
+                            <ComboBoxItem Style="{StaticResource KeepItem}"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[OptBilinear]}" Tag="0"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[OptTrilinear]}" Tag="1"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[OptAniso2]}" Tag="2"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[OptAniso4]}" Tag="4"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[OptAniso8]}" Tag="8"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[OptAniso16]}" Tag="16"/>
+                        </ComboBox>
+
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[GraphicsResolution]}"
+                                   Style="{StaticResource MutedTextStyle}"/>
+                        <ComboBox x:Name="TextureResolutionCombo" Margin="0,5,0,0">
+                            <ComboBoxItem Style="{StaticResource KeepItem}"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[OptVeryLow]}" Tag="2"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[OptLow]}" Tag="1"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[OptHigh]}" Tag="0"/>
+                        </ComboBox>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="2" Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[GraphicsDetail]}"
+                                   Style="{StaticResource SectionTitleStyle}" Margin="0,0,0,15"/>
+
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[GraphicsModelDetail]}"
+                                   Style="{StaticResource MutedTextStyle}"/>
+                        <ComboBox x:Name="ModelDetailCombo" Margin="0,5,0,14">
+                            <ComboBoxItem Style="{StaticResource KeepItem}"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[OptLowest]}" Tag="0.600000"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[OptLow]}" Tag="0.800000"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[OptMedium]}" Tag="1"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[OptHigh]}" Tag="2"/>
+                        </ComboBox>
+
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[GraphicsParticles]}"
+                                   Style="{StaticResource MutedTextStyle}"/>
+                        <ComboBox x:Name="ParticleQualityCombo" Margin="0,5,0,14">
+                            <ComboBoxItem Style="{StaticResource KeepItem}"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[OptLow]}" Tag="0"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[OptMedium]}" Tag="1"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[OptHigh]}" Tag="2"/>
+                        </ComboBox>
+
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[GraphicsRagdolls]}"
+                                   Style="{StaticResource MutedTextStyle}"/>
+                        <ComboBox x:Name="RagdollCountCombo" Margin="0,5,0,14">
+                            <ComboBoxItem Style="{StaticResource KeepItem}"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[OptLow]}" Tag="0"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[OptMedium]}" Tag="4"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[OptHigh]}" Tag="8"/>
+                        </ComboBox>
+
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[GraphicsWorldDecals]}"
+                                   Style="{StaticResource MutedTextStyle}"/>
+                        <ComboBox x:Name="DecalsCombo">
+                            <ComboBoxItem Style="{StaticResource KeepItem}"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOff]}" Tag="0"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOn]}" Tag="256"/>
+                        </ComboBox>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <Grid Margin="0,16,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="16"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[GraphicsRendering]}"
+                                   Style="{StaticResource SectionTitleStyle}" Margin="0,0,0,15"/>
+
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[GraphicsAntiAliasing]}"
+                                   Style="{StaticResource MutedTextStyle}"/>
+                        <ComboBox x:Name="AntiAliasingCombo" Margin="0,5,0,14">
+                            <ComboBoxItem Style="{StaticResource KeepItem}"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOff]}" Tag="0"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[OptTSAA]}" Tag="12"/>
+                        </ComboBox>
+
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[GraphicsVSync]}"
+                                   Style="{StaticResource MutedTextStyle}"/>
+                        <ComboBox x:Name="VSyncCombo" Margin="0,5,0,14">
+                            <ComboBoxItem Style="{StaticResource KeepItem}"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOff]}" Tag="0"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOn]}" Tag="1"/>
+                        </ComboBox>
+
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[GraphicsVolumetricLighting]}"
+                                   Style="{StaticResource MutedTextStyle}"/>
+                        <ComboBox x:Name="VolumetricLightingCombo" Margin="0,5,0,14">
+                            <ComboBoxItem Style="{StaticResource KeepItem}"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOff]}" Tag="0"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOn]}" Tag="1"/>
+                        </ComboBox>
+
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[GraphicsVolumetricFog]}"
+                                   Style="{StaticResource MutedTextStyle}"/>
+                        <ComboBox x:Name="VolumetricFogCombo">
+                            <ComboBoxItem Style="{StaticResource KeepItem}"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOff]}" Tag="0"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOn]}" Tag="1"/>
+                        </ComboBox>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="2" Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[GraphicsAdvancedRendering]}"
+                                   Style="{StaticResource SectionTitleStyle}" Margin="0,0,0,15"/>
+
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[GraphicsDynamicResolution]}"
+                                   Style="{StaticResource MutedTextStyle}"/>
+                        <ComboBox x:Name="DynamicResolutionCombo" Margin="0,5,0,14">
+                            <ComboBoxItem Style="{StaticResource KeepItem}"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOff]}" Tag="0"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOn]}" Tag="1"/>
+                        </ComboBox>
+
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[GraphicsDynamicStreaming]}"
+                                   Style="{StaticResource MutedTextStyle}"/>
+                        <ComboBox x:Name="DynamicStreamingCombo" Margin="0,5,0,14">
+                            <ComboBoxItem Style="{StaticResource KeepItem}"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOff]}" Tag="0"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOn]}" Tag="1"/>
+                        </ComboBox>
+
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[GraphicsAmbientOcclusion]}"
+                                   Style="{StaticResource MutedTextStyle}"/>
+                        <ComboBox x:Name="AmbientOcclusionCombo" Margin="0,5,0,14">
+                            <ComboBoxItem Style="{StaticResource KeepItem}"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOff]}" Tag="0"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[OptLow]}" Tag="1"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[OptHigh]}" Tag="2"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[OptVeryHigh]}" Tag="3"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[OptUltra]}" Tag="4"/>
+                        </ComboBox>
+
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[GraphicsMapDetail]}"
+                                   Style="{StaticResource MutedTextStyle}"/>
+                        <ComboBox x:Name="MapDetailCombo">
+                            <ComboBoxItem Style="{StaticResource KeepItem}"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[OptMinimum]}" Tag="0"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[OptLow]}" Tag="1"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[OptHigh]}" Tag="2"/>
+                        </ComboBox>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+        </StackPanel>
+
+    </ScrollViewer>
+
+</UserControl>

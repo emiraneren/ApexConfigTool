@@ -1,0 +1,124 @@
+<UserControl x:Class="ApexConfigTool.Views.ShadowsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:loc="clr-namespace:ApexConfigTool.Services">
+
+    <UserControl.Resources>
+        <Style x:Key="KeepItem" TargetType="ComboBoxItem">
+            <Setter Property="Content" Value="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonKeepCurrent]}"/>
+            <Setter Property="Tag" Value="__KEEP__"/>
+        </Style>
+    </UserControl.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+
+        <StackPanel Margin="34">
+
+            <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[ShadowsTitle]}"
+                       Style="{StaticResource PageTitleStyle}"
+                       Margin="0,0,0,28"/>
+
+            <Border Style="{StaticResource CardStyle}" Margin="0,0,0,16">
+                <CheckBox x:Name="DisableAllShadowsCheck"
+                          Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[ShadowsDisableAll]}"
+                          FontSize="15" FontWeight="SemiBold"/>
+            </Border>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="16"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[ShadowsRendering]}"
+                                   Style="{StaticResource SectionTitleStyle}" Margin="0,0,0,15"/>
+
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[ShadowsShadows]}"
+                                   Style="{StaticResource MutedTextStyle}"/>
+                        <ComboBox x:Name="ShadowEnableCombo" Margin="0,5,0,14">
+                            <ComboBoxItem Style="{StaticResource KeepItem}"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOff]}" Tag="0"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOn]}" Tag="1"/>
+                        </ComboBox>
+
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[ShadowsDynamicShadows]}"
+                                   Style="{StaticResource MutedTextStyle}"/>
+                        <ComboBox x:Name="DynamicShadowCombo" Margin="0,5,0,14">
+                            <ComboBoxItem Style="{StaticResource KeepItem}"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOff]}" Tag="0"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOn]}" Tag="1"/>
+                        </ComboBox>
+
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[ShadowsCascadeShadows]}"
+                                   Style="{StaticResource MutedTextStyle}"/>
+                        <ComboBox x:Name="CsmEnabledCombo" Margin="0,5,0,14">
+                            <ComboBoxItem Style="{StaticResource KeepItem}"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOff]}" Tag="0"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOn]}" Tag="1"/>
+                        </ComboBox>
+
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[ShadowsNewShadowSystem]}"
+                                   Style="{StaticResource MutedTextStyle}"/>
+                        <ComboBox x:Name="NewShadowSettingsCombo">
+                            <ComboBoxItem Style="{StaticResource KeepItem}"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOff]}" Tag="0"/>
+                            <ComboBoxItem Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CommonOn]}" Tag="1"/>
+                        </ComboBox>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="2" Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[ShadowsCascadeQuality]}"
+                                   Style="{StaticResource SectionTitleStyle}" Margin="0,0,0,15"/>
+
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[ShadowsCoverage]}"
+                                   Style="{StaticResource MutedTextStyle}"/>
+                        <ComboBox x:Name="CsmCoverageCombo" Margin="0,5,0,14">
+                            <ComboBoxItem Style="{StaticResource KeepItem}"/>
+                            <ComboBoxItem Content="0" Tag="0"/>
+                            <ComboBoxItem Content="1" Tag="1"/>
+                        </ComboBox>
+
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[ShadowsCascadeResolution]}"
+                                   Style="{StaticResource MutedTextStyle}"/>
+                        <ComboBox x:Name="CsmResolutionCombo" Margin="0,5,0,14">
+                            <ComboBoxItem Style="{StaticResource KeepItem}"/>
+                            <ComboBoxItem Content="0" Tag="0"/>
+                            <ComboBoxItem Content="512" Tag="512"/>
+                            <ComboBoxItem Content="1024" Tag="1024"/>
+                            <ComboBoxItem Content="2048" Tag="2048"/>
+                        </ComboBox>
+
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[ShadowsShadowDepth]}"
+                                   Style="{StaticResource MutedTextStyle}"/>
+                        <ComboBox x:Name="ShadowDepthCombo" Margin="0,5,0,14">
+                            <ComboBoxItem Style="{StaticResource KeepItem}"/>
+                            <ComboBoxItem Content="0" Tag="0"/>
+                            <ComboBoxItem Content="256" Tag="256"/>
+                            <ComboBoxItem Content="512" Tag="512"/>
+                            <ComboBoxItem Content="1024" Tag="1024"/>
+                        </ComboBox>
+
+                        <TextBlock Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[ShadowsUpresFactor]}"
+                                   Style="{StaticResource MutedTextStyle}"/>
+                        <ComboBox x:Name="ShadowUpresCombo">
+                            <ComboBoxItem Style="{StaticResource KeepItem}"/>
+                            <ComboBoxItem Content="0" Tag="0"/>
+                            <ComboBoxItem Content="1" Tag="1"/>
+                            <ComboBoxItem Content="2" Tag="2"/>
+                            <ComboBoxItem Content="3" Tag="3"/>
+                        </ComboBox>
+                    </StackPanel>
+                </Border>
+
+            </Grid>
+
+        </StackPanel>
+
+    </ScrollViewer>
+
+</UserControl>
