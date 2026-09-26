@@ -12,62 +12,6 @@
                               Title="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[DashTitle]}"
                               Subtitle="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[DashSubtitle]}"/>
 
-            <!-- Ates efektli marka yazisi: dikey alevli renk gecisi + nabiz gibi atan turuncu parlama. -->
-            <Border CornerRadius="16"
-                    Margin="0,0,0,22"
-                    Padding="0,22"
-                    Background="#12100D0A">
-
-                <TextBlock Text="Decipline"
-                           HorizontalAlignment="Center"
-                           FontFamily="Segoe UI Black, Segoe UI"
-                           FontSize="58"
-                           FontWeight="Black"
-                           FontStyle="Italic">
-
-                    <TextBlock.Foreground>
-                        <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
-                            <GradientStop Color="#B8210F" Offset="0"/>
-                            <GradientStop Color="#FF7A1E" Offset="0.45"/>
-                            <GradientStop Color="#FFC24D" Offset="0.75"/>
-                            <GradientStop Color="#FFEFC2" Offset="1"/>
-                        </LinearGradientBrush>
-                    </TextBlock.Foreground>
-
-                    <TextBlock.Effect>
-                        <DropShadowEffect x:Name="FireGlow"
-                                          Color="#FF7A1E"
-                                          Direction="0"
-                                          ShadowDepth="0"
-                                          BlurRadius="18"
-                                          Opacity="0.85"/>
-                    </TextBlock.Effect>
-
-                    <TextBlock.Triggers>
-                        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation Storyboard.TargetName="FireGlow"
-                                                     Storyboard.TargetProperty="BlurRadius"
-                                                     From="12" To="30"
-                                                     Duration="0:0:1.1"
-                                                     AutoReverse="True"
-                                                     RepeatBehavior="Forever"/>
-                                    <DoubleAnimation Storyboard.TargetName="FireGlow"
-                                                     Storyboard.TargetProperty="Opacity"
-                                                     From="0.65" To="1"
-                                                     Duration="0:0:1.1"
-                                                     AutoReverse="True"
-                                                     RepeatBehavior="Forever"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                    </TextBlock.Triggers>
-
-                </TextBlock>
-
-            </Border>
-
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
