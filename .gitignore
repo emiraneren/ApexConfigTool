@@ -6,3 +6,6 @@ _publish/
 *.zip
 *.user
 .vs/
+DpiToolBin/
+WinDivert.dll
+WinDivert64.sys
