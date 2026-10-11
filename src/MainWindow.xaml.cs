@@ -219,13 +219,20 @@ public partial class MainWindow : Window
 
         if (videoConfig == null || backupService == null)
         {
+            // Config dosyası bulunamasa bile "başlat" düğmesi oyunu açabilmeli.
+            if (preferLaunch)
+            {
+                LaunchApex();
+                return true;
+            }
+
             StatusText.Text = loc.T("StatusApexConfigNotFound");
             return false;
         }
 
         if (processService.IsApexRunning())
         {
-            StatusText.Text = loc.T("StatusCloseApexBeforeApply");
+            StatusText.Text = loc.T(preferLaunch ? "StatusLaunchAlreadyRunning" : "StatusCloseApexBeforeApply");
             return false;
         }
 
@@ -333,13 +340,27 @@ public partial class MainWindow : Window
                 return;
             }
 
-            processService.LaunchApex(installation);
-            StatusText.Text = loc.T("StatusLaunching");
+            LaunchOutcome outcome = processService.LaunchApex(installation);
+
+            StatusText.Text = outcome switch
+            {
+                LaunchOutcome.AlreadyRunning => loc.T("StatusLaunchAlreadyRunning"),
+                LaunchOutcome.SentToSteam => loc.T("StatusLaunchSentToSteam"),
+                _ => loc.T("StatusLaunching")
+            };
+
             UpdateProcessStatus();
         }
         catch (Exception ex)
         {
             StatusText.Text = loc.F("StatusLaunchError", ex.Message);
+
+            // Durum satırı kolay gözden kaçıyor; başlatılamadıysa bunu açıkça göster.
+            MessageBox.Show(
+                loc.F("StatusLaunchError", ex.Message),
+                loc.T("LaunchErrorTitle"),
+                MessageBoxButton.OK,
+                MessageBoxImage.Warning);
         }
     }
 

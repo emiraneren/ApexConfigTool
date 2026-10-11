@@ -42,7 +42,7 @@
                 <StackPanel>
 
                     <!-- Logo -->
-                    <Grid Margin="6,10,0,2">
+                    <Grid Margin="6,10,0,20">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="38"/>
                             <ColumnDefinition Width="*"/>
@@ -59,50 +59,6 @@
                                    FontFamily="Segoe UI Variable Display" FontSize="19" FontWeight="SemiBold"
                                    VerticalAlignment="Center" Margin="10,0,0,0"/>
                     </Grid>
-
-                    <!-- Kucuk marka etiketi: ates efektli gradyan + hafif nabiz parlamasi. -->
-                    <TextBlock Text="Decipline"
-                               HorizontalAlignment="Right"
-                               Margin="0,0,4,18"
-                               FontFamily="Segoe UI Black, Segoe UI"
-                               FontSize="13"
-                               FontWeight="Black"
-                               FontStyle="Italic">
-
-                        <TextBlock.Foreground>
-                            <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
-                                <GradientStop Color="#B8210F" Offset="0"/>
-                                <GradientStop Color="#FF7A1E" Offset="0.45"/>
-                                <GradientStop Color="#FFC24D" Offset="0.75"/>
-                                <GradientStop Color="#FFEFC2" Offset="1"/>
-                            </LinearGradientBrush>
-                        </TextBlock.Foreground>
-
-                        <TextBlock.Effect>
-                            <DropShadowEffect x:Name="FireGlowSmall"
-                                              Color="#FF7A1E"
-                                              Direction="0"
-                                              ShadowDepth="0"
-                                              BlurRadius="6"
-                                              Opacity="0.85"/>
-                        </TextBlock.Effect>
-
-                        <TextBlock.Triggers>
-                            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="FireGlowSmall"
-                                                         Storyboard.TargetProperty="BlurRadius"
-                                                         From="4" To="10"
-                                                         Duration="0:0:1.1"
-                                                         AutoReverse="True"
-                                                         RepeatBehavior="Forever"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                        </TextBlock.Triggers>
-
-                    </TextBlock>
 
                     <!-- Navigasyon -->
 
