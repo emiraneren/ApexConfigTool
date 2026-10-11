@@ -7,7 +7,7 @@ Apex Legends ayarlarını (grafik, gölge, FOV, FPS limiti, hassasiyet vb.) aray
 1. `ApexConfigTool.exe` dosyasını indir ve çalıştır.
 2. Apex'i kapat, ayarları seç, uygula.
 
-.NET 10 Desktop Runtime kurulu olmalı: https://dotnet.microsoft.com/download/dotnet/10.0
+Kurulum gerekmez: .NET çalışma zamanı `.exe`'nin içine gömülüdür, bu yüzden dosya yaklaşık 60 MB'tır. Windows "tanınmayan uygulama" uyarısı verirse "Daha fazla bilgi → Yine de çalıştır" deyin (dosya imzasız olduğu için çıkar).
 
 ## Neler yapıyor?
 
